@@ -4,34 +4,26 @@ import wpilib
 from commands2 import SubsystemBase
 
 
-class SwingArmSubsystem(SubsystemBase):
+class ArmSubsystem(SubsystemBase):
     # Create a new LiftSubsystem
 
     def __init__(self) -> None:
         super().__init__()
 
-        self.swing_arm_motor = rev.SparkFlex(3, rev.SparkFlex.MotorType.kBrushless)
-
-        self.swing_arm_abs_encoder = self.swing_arm_motor.getAbsoluteEncoder()
+        self.arm_motor = rev.SparkFlex(1, rev.SparkMax.MotorType.kBrushless)
 
         # define the wrist subsystem's network table
         nt_instance = ntcore.NetworkTableInstance.getDefault()
-        swing_arm_table = nt_instance.getTable("swing_arm_table")
+        arm_table = nt_instance.getTable("arm_table")
 
-        self.swing_arm_position_entry = swing_arm_table.getDoubleTopic("swing_arm_position").publish()
-        self.swing_arm_pid_output_entry = swing_arm_table.getDoubleTopic("swing_arm_pid_output").publish()
+        self.arm_position_entry = arm_table.getDoubleTopic("arm_position").publish()
+        self.arm_pid_output_entry = arm_table.getDoubleTopic("arm_pid_output").publish()
 
-    def periodic(self) -> None:
-        self.swing_arm_position_entry.set(self.get_swing_arm_position())
+    def periodic(self):
+        self.arm_position_entry.set(self.get_arm_position())
 
-    def set_swing_arm_speed(self, speed):
-        if speed > 0.35:
-            speed = 0.35
-        elif speed < -0.35:
-            speed = -0.35
-        else:
-            speed = speed
-        self.swing_arm_motor.set(speed)
+    def set_arm_speed(self, speed):
+        self.arm_motor.set(speed)
 
-    def get_swing_arm_position(self):
-        return self.swing_arm_abs_encoder.getPosition()
+    def get_arm_position(self):
+        return self.arm_motor.getEncoder().getPosition()

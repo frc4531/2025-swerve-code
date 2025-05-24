@@ -1,8 +1,7 @@
 import ntcore
-import rev
+import phoenix5
 import wpilib
 from commands2 import SubsystemBase
-import ntcore
 
 
 class ClimberSubsystem(SubsystemBase):
@@ -11,7 +10,7 @@ class ClimberSubsystem(SubsystemBase):
     def __init__(self) -> None:
         super().__init__()
 
-        self.climber_motor = rev.SparkFlex(6, rev.SparkFlex.MotorType.kBrushless)
+        self.climber_motor = phoenix5.TalonFX(3, "rio")
 
     def set_climber_speed(self, speed):
-        self.climber_motor.set(speed)
+        self.climber_motor.set(phoenix5.ControlMode.PercentOutput, speed)
