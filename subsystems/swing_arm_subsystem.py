@@ -2,15 +2,18 @@ import ntcore
 import rev
 import wpilib
 from commands2 import SubsystemBase
+from rev import ClosedLoopConfig
 
 
-class ArmSubsystem(SubsystemBase):
+class SwingArmSubsystem(SubsystemBase):
     # Create a new LiftSubsystem
 
     def __init__(self) -> None:
         super().__init__()
 
-        self.arm_motor = rev.SparkFlex(1, rev.SparkMax.MotorType.kBrushless)
+        self.arm_motor = rev.SparkMax(2, rev.SparkMax.MotorType.kBrushless)
+
+        self.arm_config = rev.SparkMaxConfig
 
         # define the wrist subsystem's network table
         nt_instance = ntcore.NetworkTableInstance.getDefault()
@@ -22,7 +25,7 @@ class ArmSubsystem(SubsystemBase):
     def periodic(self):
         self.arm_position_entry.set(self.get_arm_position())
 
-    def set_arm_speed(self, speed):
+    def set_swing_arm_speed(self, speed):
         self.arm_motor.set(speed)
 
     def get_arm_position(self):

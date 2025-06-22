@@ -14,6 +14,7 @@ from wpimath.trajectory import TrajectoryConfig, TrajectoryGenerator
 from commands.climber_down import ClimberDown
 from commands.climber_up import ClimberUp
 from commands.input_drive import InputDrive
+from commands.intake_in import IntakeIn
 from constants.position_constants import PositionConstants
 from commands.drive_command import DriveCommand
 from commands.intake_out import IntakeOut
@@ -75,6 +76,23 @@ class RobotContainer:
         #commands2.button.JoystickButton(self.operator_controller, 1).whileTrue(
         #    SwingArmToPosition(self.swing_arm_subsystem,0.4)
         #)
+
+        # Arm Up
+        commands2.button.JoystickButton(self.operator_controller, 4).whileTrue(
+            SwingArmUp(self.swing_arm_subsystem)
+        )
+        # Arm Down
+        commands2.button.JoystickButton(self.operator_controller, 1).whileTrue(
+            SwingArmDown(self.swing_arm_subsystem)
+        )
+        # Intake In
+        commands2.button.JoystickButton(self.operator_controller, 5).whileTrue(
+            IntakeIn(self.intake_subsystem)
+        )
+        # Intake Out
+        commands2.button.JoystickButton(self.operator_controller, 6).whileTrue(
+            IntakeOut(self.intake_subsystem)
+        )
 
     def disable_pid_subsystems(self) -> None:
         """Disables all ProfiledPIDSubsystem and PIDSubsystem instances.

@@ -10,7 +10,7 @@ class ClimberSubsystem(SubsystemBase):
     def __init__(self) -> None:
         super().__init__()
 
-        self.climber_motor = phoenix5.TalonFX(3, "rio")
+        self.climber_motor = phoenix5.TalonSRX(3)
 
     def set_climber_speed(self, speed):
         self.climber_motor.set(phoenix5.ControlMode.PercentOutput, speed)
