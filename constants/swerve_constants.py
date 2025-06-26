@@ -57,13 +57,13 @@ class DriveConstants:
 
     # SPARK MAX CAN IDs
     kFrontLeftDrivingCanId = 18 #12
-    kRearLeftDrivingCanId = 14 #16
-    kFrontRightDrivingCanId = 16 #14
+    kRearLeftDrivingCanId = 16 #16
+    kFrontRightDrivingCanId = 14 #14
     kRearRightDrivingCanId = 12 #18
 
     kFrontLeftTurningCanId = 17 #11
-    kRearLeftTurningCanId = 13 #15
-    kFrontRightTurningCanId = 15 #13
+    kRearLeftTurningCanId = 15 #15
+    kFrontRightTurningCanId = 13 #13
     kRearRightTurningCanId = 11 #17
 
     kGyroReversed = False

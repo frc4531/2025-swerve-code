@@ -1,5 +1,5 @@
 import ntcore
-import phoenix5
+from phoenix6.hardware import TalonFX
 import wpilib
 from commands2 import SubsystemBase
 
@@ -10,7 +10,7 @@ class ClimberSubsystem(SubsystemBase):
     def __init__(self) -> None:
         super().__init__()
 
-        self.climber_motor = phoenix5.TalonSRX(3)
+        self.climber_motor = TalonFX(3, "rio")
 
     def set_climber_speed(self, speed):
-        self.climber_motor.set(phoenix5.ControlMode.PercentOutput, speed)
+        self.climber_motor.setVoltage(speed)

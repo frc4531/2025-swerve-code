@@ -78,12 +78,16 @@ class RobotContainer:
         #)
 
         # Arm Up
-        commands2.button.JoystickButton(self.operator_controller, 4).whileTrue(
-            SwingArmUp(self.swing_arm_subsystem)
+        commands2.button.JoystickButton(self.operator_controller, 4).onTrue(
+            SwingArmToPosition(self.swing_arm_subsystem, 0.51)
+        )
+        # Stow Algae
+        commands2.button.JoystickButton(self.operator_controller, 2).onTrue(
+            SwingArmToPosition(self.swing_arm_subsystem, 0.605)
         )
         # Arm Down
-        commands2.button.JoystickButton(self.operator_controller, 1).whileTrue(
-            SwingArmDown(self.swing_arm_subsystem)
+        commands2.button.JoystickButton(self.operator_controller, 1).onTrue(
+            SwingArmToPosition(self.swing_arm_subsystem, 0.68)
         )
         # Intake In
         commands2.button.JoystickButton(self.operator_controller, 5).whileTrue(
@@ -92,6 +96,14 @@ class RobotContainer:
         # Intake Out
         commands2.button.JoystickButton(self.operator_controller, 6).whileTrue(
             IntakeOut(self.intake_subsystem)
+        )
+        # Driver Controller
+        commands2.button.JoystickButton(self.driver_controller, 5).whileTrue(
+            ClimberUp(self.climber_subsystem)
+        )
+        # Intake Out
+        commands2.button.JoystickButton(self.driver_controller, 10).whileTrue(
+            ClimberDown(self.climber_subsystem)
         )
 
     def disable_pid_subsystems(self) -> None:
